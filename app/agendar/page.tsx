@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -9,8 +8,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ArrowLeft } from "lucide-react"
-import Calendar from "react-calendar"
+import Calendar, { type CalendarProps } from "react-calendar"
 import "react-calendar/dist/Calendar.css"
+
+
+// 👇 define o tipo manualmente, igual ao da lib
+type Value = NonNullable<CalendarProps["value"]>
 
 const AVAILABLE_TIMES = ["10:00", "11:00", "14:00", "15:00", "16:00"]
 
@@ -25,11 +28,14 @@ export default function AgendarPage() {
     email: "",
   })
 
-  const handleDateChange = (date: Date) => {
-    setSelectedDate(date)
+  // 👇 usa o tipo correto no parâmetro
+  const handleDateChange: CalendarProps["onChange"] = (value) => {
+  if (value instanceof Date) {
+    setSelectedDate(value)
     setSelectedTime(null)
     setShowForm(false)
   }
+}
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time)
@@ -67,7 +73,6 @@ export default function AgendarPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 px-4 py-12 pt-16">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <div className="mb-8">
           <Button asChild variant="ghost" size="sm" className="mb-4">
             <Link href="/" className="inline-flex items-center gap-2">
@@ -83,25 +88,28 @@ export default function AgendarPage() {
           </p>
         </div>
 
-        {/* Card principal */}
         <div className="bg-card rounded-2xl shadow-lg border border-border/50 p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Calendário */}
             <div>
               <h2 className="text-xl font-serif font-light mb-4">Escolha uma data</h2>
               <div className="calendar-wrapper">
-                <Calendar onChange={handleDateChange} value={selectedDate} minDate={new Date()} locale="pt-BR" />
+                <Calendar
+                  onChange={handleDateChange}
+                  value={selectedDate}
+                  minDate={new Date()}
+                  locale="pt-BR"
+                />
               </div>
             </div>
 
-            {/* Horários e Formulário */}
             <div>
               {selectedDate && (
                 <>
                   <h2 className="text-xl font-serif font-light mb-4">Horários disponíveis</h2>
-                  <p className="text-sm text-muted-foreground mb-4 capitalize">{formatDate(selectedDate)}</p>
+                  <p className="text-sm text-muted-foreground mb-4 capitalize">
+                    {formatDate(selectedDate)}
+                  </p>
 
-                  {/* Grid de horários */}
                   <div className="grid grid-cols-3 gap-2 mb-6">
                     {AVAILABLE_TIMES.map((time) => (
                       <button
@@ -145,7 +153,7 @@ export default function AgendarPage() {
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          placeholder="(11) 98765-4321"
+                          placeholder="(54) 99614-2574"
                           className="bg-background"
                         />
                       </div>
@@ -174,17 +182,19 @@ export default function AgendarPage() {
 
               {!selectedDate && (
                 <div className="flex items-center justify-center h-full text-center text-muted-foreground">
-                  <p className="text-pretty">Selecione uma data no calendário para ver os horários disponíveis</p>
+                  <p className="text-pretty">
+                    Selecione uma data no calendário para ver os horários disponíveis
+                  </p>
                 </div>
               )}
             </div>
           </div>
         </div>
 
-        {/* Informações adicionais */}
         <div className="mt-6 text-center text-sm text-muted-foreground">
           <p>
-            Dúvidas? Entre em contato pelo telefone <strong className="text-foreground">(11) 98765-4321</strong>
+            Dúvidas? Entre em contato pelo telefone{" "}
+            <strong className="text-foreground">(54) 99614-2574</strong>
           </p>
         </div>
       </div>

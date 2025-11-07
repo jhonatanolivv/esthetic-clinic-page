@@ -1,13 +1,15 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Sparkles } from "lucide-react"
+import { signIn } from "@/app/auth/auth"
+
+// E-mail da médica que terá acesso
+const MEDICA_EMAIL = "grazivelaski@gmail.com"
 
 export default function AdminLoginPage() {
   const router = useRouter()
@@ -16,18 +18,30 @@ export default function AdminLoginPage() {
     password: "",
   })
   const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
+    setLoading(true)
 
-    // Simulação de login (em produção, usar autenticação real)
-    if (formData.email === "admin@clinicabelle.com" && formData.password === "admin123") {
-      localStorage.setItem("adminAuth", "true")
-      router.push("/admin")
-    } else {
+    const { user, error: authError } = await signIn(formData.email, formData.password)
+    setLoading(false)
+
+    if (authError || !user) {
       setError("E-mail ou senha incorretos")
+      return
     }
+
+    // Verifica se é o e-mail da médica
+    if (user.email !== MEDICA_EMAIL) {
+      setError("Acesso negado: apenas a médica tem permissão")
+      return
+    }
+
+    // Marca sessão local para o front-end
+    localStorage.setItem("adminAuth", "true")
+    router.push("/admin")
   }
 
   return (
@@ -54,7 +68,7 @@ export default function AdminLoginPage() {
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="admin@clinicabelle.com"
+                placeholder="Seu e-mail"
                 required
                 className="bg-background"
               />
@@ -75,15 +89,10 @@ export default function AdminLoginPage() {
 
             {error && <p className="text-sm text-red-500">{error}</p>}
 
-            <Button type="submit" size="lg" className="w-full">
-              Entrar
+            <Button type="submit" size="lg" className="w-full" disabled={loading}>
+              {loading ? "Entrando..." : "Entrar"}
             </Button>
           </form>
-
-          <div className="mt-6 pt-6 border-t border-border/50 text-center text-sm text-muted-foreground">
-            <p>Credenciais de teste:</p>
-            <p className="font-mono text-xs mt-1">admin@clinicabelle.com / admin123</p>
-          </div>
         </div>
       </div>
     </main>

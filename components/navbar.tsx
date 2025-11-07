@@ -46,7 +46,9 @@ export function Navbar() {
             </Link>
             <Link
               href="/admin/login"
-              className="px-4 py-2 bg-gold text-white text-sm font-medium rounded-lg hover:bg-gold/90 transition-colors"
+              className={`text-sm font-medium transition-colors ${
+                isActive("/agendar") ? "text-gold" : "text-charcoal hover:text-gold"
+              }`}
             >
               Área Médica
             </Link>

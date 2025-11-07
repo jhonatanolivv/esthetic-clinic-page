@@ -69,7 +69,7 @@ function ConfirmacaoContent() {
         {/* Informações de contato */}
         <div className="mt-6 text-center text-sm text-muted-foreground">
           <p>
-            Dúvidas? Entre em contato pelo telefone <strong className="text-foreground">(11) 98765-4321</strong>
+            Dúvidas? Entre em contato pelo telefone <strong className="text-foreground">(54) 99614-55552574</strong>
           </p>
         </div>
       </div>

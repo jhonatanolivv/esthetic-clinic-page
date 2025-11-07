@@ -49,8 +49,8 @@ export function ServicesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
-            <Card key={service.title} className="border-border/50 hover:border-primary/30 transition-colors">
-              <CardContent className="p-8 space-y-4">
+            <Card key={service.title} className="border-border/50 hover:border-primary/30 transition-colors transition-transform duration-300 hover:scale-105 cursor-pointer">
+              <CardContent className="p-8 space-y-4 cursor: pointer">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                   <service.icon className="w-6 h-6 text-primary" />
                 </div>

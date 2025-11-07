@@ -1,11 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Cormorant_Garamond, Geist } from "next/font/google"
+import { Cormorant_Garamond } from "next/font/google"
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Navbar } from "@/components/navbar"
 
-const _geist = Geist({ subsets: ["latin"] })
+const _geist = GeistSans
 const _cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],

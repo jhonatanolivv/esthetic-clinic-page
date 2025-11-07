@@ -12,7 +12,7 @@ export function Footer() {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/graziele_velaski/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-secondary hover:bg-primary/10 flex items-center justify-center transition-colors"
@@ -42,7 +42,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border/50 text-center text-sm text-muted-foreground">
-          <p>© 2025 Clínica Belle. Todos os direitos reservados.</p>
+          <p>© 2025 Graziele Velaski. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>

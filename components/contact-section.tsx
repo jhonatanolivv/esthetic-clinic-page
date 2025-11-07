@@ -44,9 +44,9 @@ export function ContactSection() {
                   <div>
                     <h3 className="font-medium mb-1">Endereço</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Av. Paulista, 1000 - Conjunto 501
+                      R. Augusto Pestana, 885
                       <br />
-                      Bela Vista, São Paulo - SP
+                      Canela, RS
                     </p>
                   </div>
                 </div>
@@ -57,7 +57,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="font-medium mb-1">Telefone</h3>
-                    <p className="text-sm text-muted-foreground">(11) 98765-4321</p>
+                    <p className="text-sm text-muted-foreground">(54) 99614-2574</p>
                   </div>
                 </div>
 
@@ -78,7 +78,7 @@ export function ContactSection() {
                   <div>
                     <h3 className="font-medium mb-1">Horário de Atendimento</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Segunda a Sexta: 9h às 19h
+                      Segunda a Sexta: 10h às 18h
                       <br />
                       Sábado: 9h às 14h
                     </p>
@@ -107,7 +107,7 @@ export function ContactSection() {
                   <Input
                     id="phone"
                     type="tel"
-                    placeholder="(11) 98765-4321"
+                    placeholder="(54) 99614-2574"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     required

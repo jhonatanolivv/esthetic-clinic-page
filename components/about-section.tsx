@@ -17,27 +17,20 @@ export function AboutSection() {
           <div className="space-y-6">
             <div className="space-y-4">
               <h2 className="text-4xl md:text-5xl font-serif font-light tracking-tight text-balance">
-                Dra. Isabella Belle
+                Graziele Velaski
               </h2>
-              <p className="text-lg text-primary font-medium">Médica Dermatologista | CRM 12345</p>
+              <p className="text-lg text-primary font-medium">Esteticista e Cosmetóloga | CRM 12345</p>
             </div>
 
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Com mais de 15 anos de experiência em dermatologia estética, a Dra. Isabella Belle é referência em
-                tratamentos faciais e corporais que respeitam a individualidade de cada paciente.
-              </p>
-              <p>
-                Formada pela Universidade de São Paulo e com especialização internacional em harmonização facial, ela
-                combina técnica apurada com sensibilidade artística para resultados naturais e elegantes.
-              </p>
-              <p>
-                Na Clínica Belle, cada procedimento é realizado com atenção aos mínimos detalhes, priorizando sua
-                segurança, conforto e satisfação.
+                Especialista em estética avançada, dedicada a revelar a sua melhor versão. 
+                Através de tratamentos faciais e corporais personalizados, realço sua beleza natural e promovo uma pele radiante e saudável. 
+                Minha expertise inclui protocolos para estrias, hidratação profunda e terapias que renovam não apenas a sua pele, mas também o seu bem-estar e a sua autoconfiança.
               </p>
             </div>
 
-            <div className="pt-4 space-y-3">
+            {/* <div className="pt-4 space-y-3">
               <div className="flex items-center gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                 <span className="text-sm">Membro da Sociedade Brasileira de Dermatologia</span>
@@ -50,7 +43,7 @@ export function AboutSection() {
                 <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                 <span className="text-sm">Certificação Internacional em Estética Avançada</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
