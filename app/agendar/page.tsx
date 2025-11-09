@@ -10,9 +10,9 @@ import { Label } from "@/components/ui/label"
 import { ArrowLeft } from "lucide-react"
 import Calendar, { type CalendarProps } from "react-calendar"
 import "react-calendar/dist/Calendar.css"
+import { saveAppointment } from "@/app/appoitments/appoitments" // 👈 importa função de salvar
 
-
-// 👇 define o tipo manualmente, igual ao da lib
+// Define o tipo correto para o valor do calendário
 type Value = NonNullable<CalendarProps["value"]>
 
 const AVAILABLE_TIMES = ["10:00", "11:00", "14:00", "15:00", "16:00"]
@@ -27,15 +27,16 @@ export default function AgendarPage() {
     phone: "",
     email: "",
   })
+  const [loading, setLoading] = useState(false)
 
-  // 👇 usa o tipo correto no parâmetro
+  // Manipula a mudança de data
   const handleDateChange: CalendarProps["onChange"] = (value) => {
-  if (value instanceof Date) {
-    setSelectedDate(value)
-    setSelectedTime(null)
-    setShowForm(false)
+    if (value instanceof Date) {
+      setSelectedDate(value)
+      setSelectedTime(null)
+      setShowForm(false)
+    }
   }
-}
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time)
@@ -49,13 +50,39 @@ export default function AgendarPage() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // 👇 Função corrigida: agora salva o agendamento no Supabase
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!selectedDate || !selectedTime) {
+      alert("Por favor, selecione uma data e horário.")
+      return
+    }
+
+    setLoading(true)
+
+    const appointment = {
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      date: selectedDate.toISOString(),
+      time: selectedTime,
+    }
+
+    const { error } = await saveAppointment(appointment)
+
+    setLoading(false)
+
+    if (error) {
+      console.error("Erro ao salvar o agendamento:", error)
+      alert("Erro ao salvar o agendamento. Tente novamente.")
+      return
+    }
 
     const params = new URLSearchParams({
       name: formData.name,
-      date: selectedDate?.toISOString() || "",
-      time: selectedTime || "",
+      date: selectedDate.toISOString(),
+      time: selectedTime,
     })
 
     router.push(`/agendar/confirmacao?${params.toString()}`)
@@ -172,8 +199,8 @@ export default function AgendarPage() {
                         />
                       </div>
 
-                      <Button type="submit" size="lg" className="w-full">
-                        Confirmar Agendamento
+                      <Button type="submit" size="lg" className="w-full" disabled={loading}>
+                        {loading ? "Salvando..." : "Confirmar Agendamento"}
                       </Button>
                     </form>
                   )}
