@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { getAppointments } from "../../Appointments/appointments"
+import { getAppointments } from "../../appointments/appointments"
 import type { Appointment } from "../../types/appointment"
 
 export default function AdminAgendamentosPage() {

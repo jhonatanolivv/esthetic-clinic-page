@@ -3,7 +3,7 @@ import type { Appointment } from '../types/appointment'
 
 export async function saveAppointment(appointment: Appointment) {
   const { data, error } = await supabase
-    .from('Appointments') // 
+    .from('Appointments') 
     .insert([appointment])
 
   if (error) console.error('Erro ao salvar agendamento:', error)

@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { ArrowLeft } from "lucide-react"
 import Calendar, { type CalendarProps } from "react-calendar"
 import "react-calendar/dist/Calendar.css"
-import { saveAppointment } from "@/app/Appointments/appointments" // 👈 importa função de salvar
+import { saveAppointment } from "@/app/appointments/appointments" 
 
 // Define o tipo correto para o valor do calendário
 type Value = NonNullable<CalendarProps["value"]>
