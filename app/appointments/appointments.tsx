@@ -1,5 +1,5 @@
 import { supabase } from '../../lib/supabaseClient'
-import type { Appointment } from '../../app/types/appointment'
+import type { Appointment } from '../types/appointment'
 
 export async function saveAppointment(appointment: Appointment) {
   const { data, error } = await supabase
