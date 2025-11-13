@@ -1,8 +1,10 @@
 import { supabase } from "../../lib/supabaseClient"
 import type { Ficha } from "../types/ficha"
 
+// ----------------------------------------------------------
+// Criar Ficha
+// ----------------------------------------------------------
 export async function createFicha(ficha: Omit<Ficha, "id" | "created_at">) {
-  // pega o user logado
   const {
     data: { user },
     error: userError
@@ -13,7 +15,6 @@ export async function createFicha(ficha: Omit<Ficha, "id" | "created_at">) {
     throw new Error("Usuário não autenticado")
   }
 
-  // garante user_id no payload
   const payload = {
     ...ficha,
     user_id: user.id
@@ -31,4 +32,32 @@ export async function createFicha(ficha: Omit<Ficha, "id" | "created_at">) {
   }
 
   return data
+}
+
+// ----------------------------------------------------------
+// Buscar Fichas
+// ----------------------------------------------------------
+export async function getFichas(): Promise<Ficha[]> {
+  const {
+    data: { user },
+    error: userError
+  } = await supabase.auth.getUser()
+
+  if (userError || !user) {
+    console.error("Usuário não autenticado", userError)
+    throw new Error("Usuário não autenticado")
+  }
+
+  const { data, error } = await supabase
+    .from("fichas")
+    .select("*")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
+
+  if (error) {
+    console.error("Erro ao buscar fichas:", error)
+    throw error
+  }
+
+  return data || []
 }
