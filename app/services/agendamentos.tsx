@@ -4,7 +4,7 @@ export async function getAgendamentos() {
   const { data, error } = await supabase
     .from("Appointments")
     .select("*")
-    .order("data", { ascending: true })
+    .order("date", { ascending: true })
 
   return { data, error }
 }

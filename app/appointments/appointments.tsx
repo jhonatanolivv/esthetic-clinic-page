@@ -1,7 +1,7 @@
   import { supabase } from '../../lib/supabaseClient'
-  import type { Appointment } from '../types/appointment'
+  import type { Appointments } from '../types/appointment'
 
-  export async function saveAppointment(appointment: Appointment) {
+  export async function saveAppointment(appointment: Appointments) {
     const { data, error } = await supabase
       .from('Appointments') 
       .insert([appointment])
