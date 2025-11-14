@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { getAppointments } from "../../appointments/appointments"
-import type { Appointment } from "../../types/appointment"
+import type { Appointments } from "../../types/appointment"
 
 export default function AdminAgendamentosPage() {
-  const [appointments, setAppointments] = useState<Appointment[]>([])
+  const [appointments, setAppointments] = useState<Appointments[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-export interface Appointment {
+export interface Appointments {
   id?: string
   name: string
   phone: string
