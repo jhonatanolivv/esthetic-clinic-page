@@ -48,9 +48,17 @@ export default function AdminDashboard() {
         const fichasResponse: any = await getFichas()
 
         // Trata corretamente se o retorno for { data, error } ou array direto
-        const agendamentosData: Agendamento[] = Array.isArray(agendamentosResponse)
-          ? agendamentosResponse
-          : agendamentosResponse?.data || []
+        const agendamentosData: Agendamento[] = (Array.isArray(agendamentosResponse)
+        ? agendamentosResponse
+        : agendamentosResponse?.data || []
+        ).map((appt: any) => ({
+        id: appt.id,
+        nome_paciente: appt.name,
+        data: appt.date,
+        hora: appt.time,
+        status: appt.status || "pendente"
+        }))
+
 
         const fichasData: Ficha[] = Array.isArray(fichasResponse)
           ? fichasResponse
