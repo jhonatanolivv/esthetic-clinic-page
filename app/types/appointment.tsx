@@ -5,5 +5,6 @@ export interface Appointments {
   email: string
   date: string
   time: string
+  status: string
   created_at?: string
 }
